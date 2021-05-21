@@ -1,26 +1,11 @@
 <template>
   <div id="edit-inventory">
-    <h3>Edit Inventory</h3>
+    <h3>Edit Place</h3>
     <div class="row">
       <form @submit.prevent="updateInventory" class="col s12">
         <div class="row">
           <div class="input-field col s12">
-            <input disabled type="text" v-model="inventory_id" required />
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <input type="text" v-model="name" required />
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
             <input type="text" v-model="garden" required />
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <input type="text" v-model="condition" required />
           </div>
         </div>
         <button type="submit" class="btn">Submit</button>
@@ -36,9 +21,7 @@ export default {
   data() {
     return {
       inventory_id: null,
-      name: null,
       garden: null,
-      condition: null,
     };
   },
   beforeRouteEnter(to, from, next) {
@@ -49,9 +32,8 @@ export default {
         querySnapshot.forEach((doc) => {
           next((vm) => {
             vm.inventory_id = doc.data().inventory_id;
-            vm.name = doc.data().name;
+
             vm.garden = doc.data().garden;
-            vm.condition = doc.data().condition;
           });
         });
       });
@@ -67,9 +49,8 @@ export default {
         .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
             this.inventory_id = doc.data();
-            this.name = doc.data().name;
+
             this.garden = doc.data().garden;
-            this.condition = doc.data().condition;
           });
         });
     },
@@ -82,9 +63,8 @@ export default {
             doc.ref
               .update({
                 inventory_id: this.inventory_id,
-                name: this.name,
+
                 garden: this.garden,
-                condition: this.condition,
               })
               .then(() => {
                 this.$router.push({

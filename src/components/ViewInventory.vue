@@ -2,10 +2,9 @@
   <div id="view-inventory">
     <ul class="collection with-header">
       <li class="collection-header">
-        <h4>{{ name }}</h4>
+        <h4>My place</h4>
       </li>
-      <li class="collection-item">Name: {{ name }}</li>
-      <li class="collection-item">Condition: {{ condition }}</li>
+      <li class="collection-item">Garden: {{ garden }}</li>
     </ul>
     <router-link to="/" class="btn grey">Back</router-link>
     <button @click="deleteInventory" class="btn red">Delete</button>
@@ -29,23 +28,19 @@ export default {
   name: "view-inventory",
   data() {
     return {
-      inventory_id: null,
-      name: null,
       garden: null,
-      condition: null,
     };
   },
   beforeRouteEnter(to, from, next) {
     db.collection("inventories")
-      .where("inventory_id", "==", to.params.inventory_id)
+      .where("garden_id", "==", to.params.garden_id)
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           next((vm) => {
             vm.inventory_id = doc.data().inventory_id;
-            vm.name = doc.data().name;
+            vm.garden_id = doc.data().garden_id;
             vm.garden = doc.data().garden;
-            vm.condition = doc.data().condition;
           });
         });
       });
@@ -56,21 +51,20 @@ export default {
   methods: {
     fetchData() {
       db.collection("inventories")
-        .where("inventory_id", "==", this.$route.params.inventory_id)
+        .where("garden_id", "==", this.$route.params.garden_id)
         .get()
         .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
-            this.inventory_id = doc.data();
-            this.name = doc.data().name;
+            this.inventory_id = doc.data().inventory_id;
+            this.garden_id = doc.data().garden_id;
             this.garden = doc.data().garden;
-            this.condition = doc.data().condition;
           });
         });
     },
     deleteInventory() {
       if (confirm("Are you sure?")) {
         db.collection("inventories")
-          .where("inventory_id", "==", this.$route.params.inventory_id)
+          .where("garden_id", "==", this.$route.params.garden_id)
           .get()
           .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
