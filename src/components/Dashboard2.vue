@@ -8,7 +8,8 @@
         class="collection-item"
       >
         {{ inventory.name }} {{ inventory.model }} {{ inventory.price }}
-        {{ inventory.ammount }} {{ inventory.source }} {{ inventory.condition }}
+        {{ inventory.ammount }} {{ inventory.price * inventory.ammount }}
+        {{ inventory.source }} {{ inventory.condition }}
         {{ inventory.txt }}
 
         <router-link

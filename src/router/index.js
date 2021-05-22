@@ -21,7 +21,7 @@ let router = new Router({
       name: 'dashboard',
       component: Dashboard,
       meta: {
-        requiresAuth: true
+        requiresGuest: true
       }
     },
     {
@@ -45,7 +45,7 @@ let router = new Router({
       name: 'dashboard2',
       component: Dashboard2,
       meta: {
-        requiresAuth: true
+        requiresGuest: true
       }
     },
     {
