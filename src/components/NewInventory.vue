@@ -24,6 +24,14 @@ export default {
       inventory_id: null,
       garden_id: null,
       garden: null,
+      name: null,
+      model: null,
+      price: null,
+      ammount: null,
+      source: null,
+      condition: null,
+      txt: null,
+      num: null,
     };
   },
   methods: {
@@ -33,6 +41,14 @@ export default {
           inventory_id: Math.random(),
           garden_id: Math.random(),
           garden: this.garden,
+          name: "Name ",
+          model: "| Model",
+          price: "| Price ",
+          ammount: "| Ammount ",
+          source: "| Source",
+          txt: "| Text",
+          condition: "| Condition",
+          num: 0,
         })
         .then((docRef) => this.$router.push("/"))
         .catch((error) => console.log(err));

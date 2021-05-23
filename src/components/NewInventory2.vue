@@ -41,11 +41,11 @@
         </div>
         <div class="row">
           <i class="fas fa-angle-right"></i>
-          <input type="radio" id="one" value="OK" v-model="condition" />
+          <input type="radio" id="one" value="Ok" v-model="condition" />
           <label for="one">&nbsp; OK</label>
-          <input type="radio" id="two" value="BORROWED" v-model="condition" />
+          <input type="radio" id="two" value="Borrowed" v-model="condition" />
           <label for="two">BORROWED</label>
-          <input type="radio" id="three" value="DAMAGED" v-model="condition" />
+          <input type="radio" id="three" value="Damaged" v-model="condition" />
           <label for="three">DAMAGED &nbsp;</label>
           <i class="fas fa-angle-left"></i>
           <div class="input-field col s12">
@@ -76,6 +76,8 @@ export default {
       source: null,
       condition: null,
       txt: null,
+      date: null,
+      num: null,
     };
   },
   methods: {
@@ -91,6 +93,8 @@ export default {
           source: this.source,
           condition: this.condition,
           txt: this.txt,
+          date: new Date().toLocaleString(),
+          num: 1,
         })
         .then((docRef) => this.$router.push("/"))
         .catch((error) => console.log(err));

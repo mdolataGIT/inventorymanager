@@ -1,16 +1,20 @@
 <template>
   <div id="dashboard">
     <ul class="collection with-header">
-      <li class="collection-header"><h4>Inventories</h4></li>
+      <li class="collection-header">
+        <h4>Inventory</h4>
+      </li>
       <li
         v-for="inventory in inventories"
         v-bind:key="inventory.id"
         class="collection-item"
       >
-        {{ inventory.name }} {{ inventory.model }} {{ inventory.price }}
-        {{ inventory.ammount }} {{ inventory.price * inventory.ammount }}
-        {{ inventory.source }} {{ inventory.condition }}
-        {{ inventory.txt }}
+        {{ inventory.name }} {{ inventory.model }} {{ inventory.price
+        }}{{ "zł" }} {{ inventory.ammount }}{{ "pc." }}
+        {{ inventory.price * inventory.ammount || "| Together " }}{{ "zł" }}
+        {{ inventory.source }} {{ inventory.txt }} {{ inventory.condition }}
+        {{ "|  " }}
+        <i class="fa fa-calendar"></i> {{ inventory.date }}
 
         <router-link
           class="secondary-content"
@@ -55,7 +59,7 @@ export default {
     db.collection("inventories")
       .where("garden_id", "==", this.$route.params.garden_id)
       //.where("name", "!=", "")
-      //.orderBy("name")
+      .orderBy("num")
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -69,6 +73,8 @@ export default {
             source: doc.data().source,
             condition: doc.data().condition,
             txt: doc.data().txt,
+            date: doc.data().date,
+            num: doc.data().num,
             //garden: doc.data().garden,
           };
           this.inventories.push(data);

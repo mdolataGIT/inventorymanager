@@ -5,11 +5,6 @@
       <form @submit.prevent="updateInventory" class="col s12">
         <div class="row">
           <div class="input-field col s12">
-            <input disabled type="text" v-model="inventory_id" required />
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
             <input type="text" v-model="name" required />
           </div>
         </div>
@@ -63,6 +58,8 @@ export default {
       source: null,
       condition: null,
       txt: null,
+      num: null,
+      data: null,
     };
   },
   beforeRouteEnter(to, from, next) {
@@ -80,6 +77,8 @@ export default {
             vm.source = doc.data().source;
             vm.condition = doc.data().condition;
             vm.txt = doc.data().txt;
+            vm.num = doc.data().num;
+            vm.date = doc.data().date;
           });
         });
       });
@@ -102,6 +101,8 @@ export default {
             this.source = doc.data().source;
             this.condition = doc.data().condition;
             this.txt = doc.data().txt;
+            this.num = doc.data().num;
+            this.date = doc.data().date;
           });
         });
     },
@@ -122,6 +123,8 @@ export default {
                 name: this.name,
                 condition: this.condition,
                 txt: this.txt,
+                date: new Date().toLocaleString(),
+                num: 1,
               })
               .then(() => {
                 this.$router.push({
